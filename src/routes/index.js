@@ -7,7 +7,7 @@ let aids = require('../models/hearingaids.model.js')
 
 //display json on webpage
 router.get('/hearingaids', function(req, res, next) {
-  mongoose.model("Aid").find({}, function(err, aids) {
+  mongoose.model("Aid").find({ deleted: {$ne: true}}, function(err, aids) {
     if (err) {
       console.log(err);
       return res.status(500).json(err);
@@ -64,5 +64,25 @@ router.put('/hearingiads/:aidId', (req, res, next) => {
     })
   });
 });
+
+router.delete('/hearingaids/:aidId', function (req, res, next) {
+  const aidId = req.params.shirtId
+
+  aids.findById(aidId, function (err, shirt) {
+    if (err) {
+      console.log(err)
+      return res.status(500).json(err)
+    }
+    if (!aids) {
+      return res.status(404).json({message: 'Data not found'})
+    }
+
+    aids.deleted = true
+
+    aids.save(function (err, doomedShirt) {
+      res.json(doomedShirt)
+    })
+  })
+})
 
 module.exports = router;

@@ -6,6 +6,7 @@ const AidSchema = new mongoose.Schema({
   style: String,
   model: String,
   ioiha: Number,
+  deleted: { type: Boolean }
 });
 
 const Aid = mongoose.model('Aid', AidSchema);

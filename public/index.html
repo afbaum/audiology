@@ -8,12 +8,15 @@
   </head>
 
   <body>
-    <div class="carousel-item">
-      <img src="../images/books.png" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h1>Track your IOIHA Outcomes</h1>
+    <!-- As a heading -->
+    <nav class="navbar navbar-dark bg-light">
+      <div class="text-center">
+        <span class="navbar-brand mb-0 h1">Track Your Hearing Aid Outcomes</span>
       </div>
-    </div>
+    </nav>
+
+    <div class="parallax"></div>
+
 
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
@@ -75,7 +78,7 @@
             <th scope="col">IOIHA Score</th>
           </tr>
         </thead>
-        <tbody id="list-table-content">
+        <tbody id="list-table-content" class="table-striped table-hover">
         </tbody>
       </table>
     </div>
@@ -86,9 +89,7 @@
         $('#formButton').on('click', () => {
            showAddAidForm();
         });
-        // $('#cancelForm').on('click', () => {
-        //   hideClearAidForm();
-        // });
+        hideHAForm();
         refreshAidsList();
         //setForm();
       });

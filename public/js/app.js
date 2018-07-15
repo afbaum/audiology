@@ -3,13 +3,13 @@ function listTableTemplate(data) {
   var compiled = '';
   data.forEach(item => {
     compiled += `
-    <tr>
+    <tr ckass="table-warning">
       <td>${item.make}</td>
       <td>${item.style}</td>
       <td>${item.model}</td>
       <td>${item.ioiha}</td>
       <td><span class="glyphicon glyphicon-pencil" onclick="handleEditAidClick(this)" data-aid-id="${item._id}" style="cursor: pointer;"></span>
-      <span class="glyphicon glyphicon-remove" onclick="handleDeleteAidClick()" data-aid-id="${item._id}"   style="cursor: pointer;"></span></td>
+      <span class="glyphicon glyphicon-remove" onclick="handleDeleteAidClick(this)" data-aid-id="${item._id}"   style="cursor: pointer;"></span></td>
     </tr>`;
   });
   return compiled;
@@ -38,6 +38,7 @@ function refreshAidsList() {
     });
 }
 
+// create an edit button
 function handleEditAidClick(element) {
   const aidId = element.getAttribute('data-aid-id');
   const aid = window.aids.find(aid => aid._id === aidId);
@@ -46,6 +47,32 @@ function handleEditAidClick(element) {
   } else {
     console.log("Aw shucks, I didn't find", aidId)
   }
+}
+
+// create a soft delete button
+function handleDeleteAidClick(element) {
+  const aidId = element.getAttribute('data-aid-id');
+
+  if (confirm("Are you sure?")) {
+      deleteAid(aidId);
+    }
+}
+
+function deleteAid(aidId) {
+  const url = '/api/hearingaids/' + aidId;
+
+  fetch(url, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(response => response.json())
+    .then(response => {
+      console.log("DOOOOOOOOOM!!!!!");
+      refreshAidsList();
+    })
+    .catch(err => {
+      console.error("I'm not dead yet!", err);
+    });
 }
 
 // submit hearing aid form data
