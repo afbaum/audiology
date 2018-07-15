@@ -1,0 +1,122 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	font-familty: sans-serif;
+	color: #222;
+}
+
+.carousel-inner img {
+	width: 100%;
+	height: 100%
+}
+
+.carousel-caption {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-75%);
+}
+
+.carousel-caption h1 {
+	font-size: 500%;
+	text-transform: uppercase;
+	text-shadow: 1px 1px 15px #000;
+}
+
+.jumbotron {
+	padding: 1rem;
+	border-radius: 0;
+}
+
+.padding {
+	padding-bottem: 2rem;
+}
+
+.welcome {
+	width: 75%;
+	margin: 0 auto;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+.welcome hr {
+	border-top: 2px solid #b4b4b4;
+	width: 95%;
+	margin-top: 3rem;
+	margin-bottom: 1rem;
+}
+
+.fixed-wrap{
+	background-image: url("../images/boat.png");
+	height: 500px;
+
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.social a {
+	font-size: 4.5em;
+	padding: 3rem;
+}
+
+.fa-facebook {
+	color: #3b5998;
+}
+
+.fa-twitter {
+	color: #00aced;
+}
+
+.fa-google-plus-g {
+	color: #dd4b39;
+}
+
+.fa-facebook:hover,
+.fa-twitter:hover,
+.fa-slack:hover,
+.fa-google-plus-g:hover {
+	color: #d5d5d5;
+}
+
+footer {
+	background-color: #3f3f3f;
+	color: #d5d5d5;
+	margin-top: .8rem;
+	margin-bottom: 1rem;
+}
+
+hr.light {
+	border-top: 1px solid #d5d5d5;
+	width: 50%;
+}
+
+
+
+/*-------- Media Queries -------*/
+
+@media (max-width: 992px){
+	.social a {
+		font-size: 4em;
+		padding: 2rem;
+}
+}
+
+@media (max-width: 768px){
+.carousel-caption {
+	top: 45%;
+}
+
+.carousel-caption h1 {
+	font-size: 350%;
+}
+
+.carousel-caption h3 {
+	font-size: 140%;
+	font-weight: 400;
+	padding-bottom: .2rem;
+}
+}
+
+@media (max-width: 567px){
+}
