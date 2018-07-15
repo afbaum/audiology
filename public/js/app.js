@@ -8,8 +8,8 @@ function listTableTemplate(data) {
       <td>${item.style}</td>
       <td>${item.model}</td>
       <td>${item.ioiha}</td>
-      <td><span class="glyphicon glyphicon-pencil" onclick="handleEditShirtClick(this)" data-shirt-id="${item._id}" style="cursor: pointer;"></span>
-      <span class="glyphicon glyphicon-remove" onclick="handleDeleteShirtClick(this)" data-shirt-id="${item._id}"   style="cursor: pointer;"></span></td>
+      <td><span class="glyphicon glyphicon-pencil" onclick="handleEditAidClick(this)" data-aid-id="${item._id}" style="cursor: pointer;"></span>
+      <span class="glyphicon glyphicon-remove" onclick="handleDeleteAidClick()" data-aid-id="${item._id}"   style="cursor: pointer;"></span></td>
     </tr>`;
   });
   return compiled;
@@ -36,6 +36,16 @@ function refreshAidsList() {
       window.aids = data;
       $('#list-table-content').html(listTableTemplate(data.aids));
     });
+}
+
+function handleEditAidClick(element) {
+  const aidId = element.getAttribute('data-aid-id');
+  const aid = window.aids.find(aid => aid._id === aidId);
+  if (aid) {
+    console.log("I will edit you!", aid);
+  } else {
+    console.log("Aw shucks, I didn't find", aidId)
+  }
 }
 
 // submit hearing aid form data
