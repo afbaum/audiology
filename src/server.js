@@ -17,8 +17,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 require("./models/hearingaids.model.js");
 
-
-
 const app = express();
 const publicPath = path.resolve(__dirname, '../public');
 

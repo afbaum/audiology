@@ -39,10 +39,37 @@ function refreshAidsList() {
 }
 
 // Hide form on page load
-$('#form-container').hide();
+$('#form-container').show();
 // When button is pressed show the form
 function showAddAidForm() {
    $('#form-container').show();
+}
+
+function submitHAForm() {
+  console.log("you clicked submit");
+
+  const aidData = {
+    make: $('#makeSelect').val(),
+    style: $('#styleSelect').val(),
+    model: $('#modelTextarea').val(),
+    ioiha: $('#ioihaTextarea').val()
+  }
+  console.log("hearing aid data", aidData);
+
+  fetch('/api/hearingaids', {
+      method: 'post',
+      body: JSON.stringify(aidData),
+      headers: {
+          'Content-Type': 'application/json'
+      }})
+      .then(response => response.json())
+      .then(aids => {
+          console.log("we have posted the data", aids);
+          refreshAidsList();
+      })
+      .catch(err => {
+          console.error("A terrible thing has happened", err);
+      })
 }
 // When cancel is pressed hide the form and clear the form
 function cancelHAForm() {

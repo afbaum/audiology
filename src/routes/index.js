@@ -17,16 +17,6 @@ router.get('/hearingaids', function(req, res, next) {
 });
 
 router.post('/hearingaids', (req, res, next) => {
-// Confirm that the form was completed
-  if (req.body.make &&
-      req.body.model &&
-      req.body.style &&
-      req.body.ioiha) {
-      } else {
-        var err = new Error('All fields required.');
-        err.status = 400;
-        return next(err);
-      }
 
   //create object with form input
   const haData = {
