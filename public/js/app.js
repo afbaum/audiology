@@ -38,13 +38,7 @@ function refreshAidsList() {
     });
 }
 
-// Hide form on page load
-$('#form-container').show();
-// When button is pressed show the form
-function showAddAidForm() {
-   $('#form-container').show();
-}
-
+// submit hearing aid form data
 function submitHAForm() {
   console.log("you clicked submit");
 
@@ -71,7 +65,19 @@ function submitHAForm() {
           console.error("A terrible thing has happened", err);
       })
 }
+
+// Hide form on page load
+function hideHAForm () {
+  $('#form-container').hide();
+}
+
+// When button is pressed show the form
+function showAddAidForm() {
+   $('#form-container').show();
+}
+
 // When cancel is pressed hide the form and clear the form
 function cancelHAForm() {
-  $('#form-container').hide();
+    $('#form-container').reset();
+    hideAddShirtForm();
 }
