@@ -41,15 +41,13 @@ function refreshAidsList() {
 // create an edit button
 function handleEditAidClick(element) {
   const aidId = element.getAttribute('data-aid-id');
-  console.log(window.aids.aids);
-
+  //get the array of the item to be edited
   const aid = window.aids.aids.find(aid => aid._id === aidId);
-
   if (aid) {
-    console.log("I will edit you!", aid);
-  } else {
-    console.log("Aw shucks, I didn't find", aidId)
+    setForm(aid);
   }
+
+  showAddAidForm();
 }
 
 // create a soft delete button
@@ -78,33 +76,72 @@ function deleteAid(aidId) {
     });
 }
 
+//clear form or populate form with edit information
+function setForm(data) {
+  data = data || {};
+
+  const formData = {
+    make: data.make || '',
+    style: data.style || '',
+    model: data.model || '',
+    ioiha: data.ioiha || '',
+    _id: data._id || '',
+  };
+
+  $('#makeSelect').val(formData.make);
+  $('#styleSelect').val(formData.style);
+  $('#modelTextarea').val(formData.model);
+  $('#ioihaTextarea').val(formData.ioiha);
+  $('#aid-id').val(formData._id);
+
+  if (data._id) {
+    $('#form-label').text("Edit Outcome");
+  } else {
+    $('#form-label').text("Enter New Outcome");
+  }
+}
+
 // submit hearing aid form data
 function submitHAForm() {
-  console.log("you clicked submit");
 
   const aidData = {
     make: $('#makeSelect').val(),
     style: $('#styleSelect').val(),
     model: $('#modelTextarea').val(),
-    ioiha: $('#ioihaTextarea').val()
-  }
-  console.log("hearing aid data", aidData);
+    ioiha: $('#ioihaTextarea').val(),
+    _id: $('#aid-id').val()
+  };
 
-  fetch('/api/hearingaids', {
-      method: 'post',
+  console.log(aidData._id);
+
+  let method, url;
+  if(aidData._id) {
+    method = 'PUT';
+    url = 'api/hearingaids/' + aidData._id;
+    console.log("put");
+  } else {
+    method = 'POST';
+    url = 'api/hearingaids';
+    console.log('post');
+  }
+
+  fetch(url, {
+      method: method,
       body: JSON.stringify(aidData),
       headers: {
           'Content-Type': 'application/json'
       }})
       .then(response => response.json())
       .then(aids => {
-          console.log("we have posted the data", aids);
+          setForm();
           refreshAidsList();
       })
       .catch(err => {
           console.error("A terrible thing has happened", err);
       })
 }
+
+//
 
 // Hide form on page load
 function hideHAForm () {
@@ -118,6 +155,6 @@ function showAddAidForm() {
 
 // When cancel is pressed hide the form and clear the form
 function cancelHAForm() {
-    $('#form-container').reset();
-    hideAddShirtForm();
+    setForm();
+    hideHAForm();
 }

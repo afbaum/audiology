@@ -39,8 +39,9 @@ router.post('/hearingaids', (req, res, next) => {
   })
 });
 
-router.put('/hearingiads/:aidId', (req, res, next) => {
-  const {aidId} = req.params.aidID;
+router.put('/hearingaids/:aidId', (req, res, next) => {
+  const {aidId} = req.params;
+  console.log(aidId);
 
   aids.findById(aidId, function (err, aids) {
     if (err) {
@@ -54,6 +55,7 @@ router.put('/hearingiads/:aidId', (req, res, next) => {
     aids.make = req.body.make;
     aids.style = req.body.style;
     aids.model = req.body.model;
+    aids.ioiha = req.body.ioiha;
 
     aids.save(function (err, savedAids) {
       if (err) {
@@ -66,21 +68,21 @@ router.put('/hearingiads/:aidId', (req, res, next) => {
 });
 
 router.delete('/hearingaids/:aidId', function (req, res, next) {
-  const aidId = req.params.shirtId
+  const {aidId} = req.params;
 
-  aids.findById(aidId, function (err, shirt) {
+  aids.findById(aidId, function (err, aids) {
     if (err) {
-      console.log(err)
+      console.error(err)
       return res.status(500).json(err)
     }
     if (!aids) {
-      return res.status(404).json({message: 'Data not found'})
+      return res.status(404).json({message: 'Hearing Aid Not Found'})
     }
 
     aids.deleted = true
 
-    aids.save(function (err, doomedShirt) {
-      res.json(doomedShirt)
+    aids.save(function (err, doomedOutcome) {
+      res.json(doomedOutcome)
     })
   })
 })

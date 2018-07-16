@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>Hearing Aid Project</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
   </head>
 
   <body>
     <!-- As a heading -->
-    <nav class="navbar navbar-dark bg-light">
-      <div class="text-center">
-        <span class="navbar-brand mb-0 h1">Track Your Hearing Aid Outcomes</span>
-      </div>
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 display-5">Track Your Hearing Aid Outcomes</span>
     </nav>
 
     <div class="parallax"></div>
@@ -83,15 +83,15 @@
       </table>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
       $(document).ready(function() {
         $('#formButton').on('click', () => {
            showAddAidForm();
         });
+
         hideHAForm();
         refreshAidsList();
-        //setForm();
+        setForm();
       });
     </script>
     <script src="/js/app.js"></script>

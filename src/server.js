@@ -9,8 +9,8 @@ const config = require('./config');
 const router = require('./routes');
 
 //mongodb connection
-// mongoose.connect('mongodb://localhost/hearingaids')
-mongoose.connection.openUri(`mongodb://${config.db.username}:${config.db.password}@${config.db.host}/${config.db.dbName}`);
+mongoose.connect('mongodb://localhost/hearingaids')
+//mongoose.connection.openUri(`mongodb://${config.db.username}:${config.db.password}@${config.db.host}/${config.db.dbName}`);
 const db = mongoose.connection;
 //mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
