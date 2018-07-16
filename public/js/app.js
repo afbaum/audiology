@@ -41,7 +41,10 @@ function refreshAidsList() {
 // create an edit button
 function handleEditAidClick(element) {
   const aidId = element.getAttribute('data-aid-id');
-  const aid = window.aids.find(aid => aid._id === aidId);
+  console.log(window.aids.aids);
+
+  const aid = window.aids.aids.find(aid => aid._id === aidId);
+
   if (aid) {
     console.log("I will edit you!", aid);
   } else {
