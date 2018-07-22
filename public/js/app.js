@@ -3,7 +3,7 @@ function listTableTemplate(data) {
   var compiled = '';
   data.forEach(item => {
     compiled += `
-    <tr ckass="table-warning">
+    <tr class="table-warning">
       <td>${item.make}</td>
       <td>${item.style}</td>
       <td>${item.model}</td>
@@ -19,7 +19,6 @@ function listTableTemplate(data) {
 function getAids() {
   return $.ajax('/api/hearingaids')
     .then(res => {
-      console.log("Results from getAids()", res);
       return res;
     })
     .fail(err => {
@@ -29,13 +28,63 @@ function getAids() {
 }
 
 //create the main table based on the mongodb data
-function refreshAidsList() {
+function refreshAidsList(make) {
   getAids()
     .then(aids => {
       const data = {aids: aids};
+      const scoreArray = [];
       window.aids = data;
       $('#list-table-content').html(listTableTemplate(data.aids));
+      data.aids.forEach(item => {
+        if (item.make === make){
+          scoreArray.push(item.ioiha);
+          return scoreArray;
+        }
+      });
+      averageByMake(scoreArray);
     });
+  }
+    //finalScores.push(averageByMake(scoreArray));
+
+const finalScores = [];
+// calculates the average of ioiha scores
+function averageByMake(scores){
+  const newScores = [];
+  if (scores.length < 1 || scores == undefined){
+    const avg = 0;
+    finalScores.push(avg);
+  } else {
+    const sum = scores.reduce((previous, current) => current += previous);
+    const avg = sum / scores.length;
+    finalScores.push(avg);
+  }
+
+  // pairing the average score to the hearing aid Make
+  if (finalScores.length === 7){
+    const haMake = ['', 'Phonak', 'Resound', 'Signia', 'Starkey', 'Oticon', 'Widex'];
+    const results = {};
+    haMake.forEach((key, i) => results[key] = finalScores[i]);
+
+    // var compiled = '';
+    // results.forEach(item => {
+    //   compiled += `
+    //   <tr class="table-warning">
+    //     <td>${item.key}</td>
+    //     <td>${item.value}</td>
+    //   </tr>`;
+    // });
+    //return compiled;
+    return results;
+    console.log(results.values);
+  }
+}
+
+// loop through the six different hearing aid makes to get each ioiha averageByMake
+function getHAScore(){
+  const haMake = ['Phonak', 'Resound', 'Signia', 'Starkey', 'Oticon', 'Widex'];
+  for (i = 0; i < haMake.length; i++) {
+    refreshAidsList(haMake[i]);
+  }
 }
 
 // create an edit button
@@ -68,11 +117,10 @@ function deleteAid(aidId) {
   })
     .then(response => response.json())
     .then(response => {
-      console.log("DOOOOOOOOOM!!!!!");
       refreshAidsList();
     })
     .catch(err => {
-      console.error("I'm not dead yet!", err);
+      console.error("Merely a flesh wound!", err);
     });
 }
 
@@ -104,6 +152,7 @@ function setForm(data) {
 // submit hearing aid form data
 function submitHAForm() {
 
+// get the values from the form
   const aidData = {
     make: $('#makeSelect').val(),
     style: $('#styleSelect').val(),
@@ -112,17 +161,14 @@ function submitHAForm() {
     _id: $('#aid-id').val()
   };
 
-  console.log(aidData._id);
-
+// select POST or PUT methods
   let method, url;
   if(aidData._id) {
     method = 'PUT';
     url = 'api/hearingaids/' + aidData._id;
-    console.log("put");
   } else {
     method = 'POST';
     url = 'api/hearingaids';
-    console.log('post');
   }
 
   fetch(url, {
@@ -139,6 +185,8 @@ function submitHAForm() {
       .catch(err => {
           console.error("A terrible thing has happened", err);
       })
+
+    cancelHAForm();
 }
 
 //
