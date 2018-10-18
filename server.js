@@ -12,8 +12,11 @@ const posts = require('./routes/api/posts');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-// DB Config
-const db = require('./config/keys').mongoURI;
+// DB Config mLab
+// const db = require('./config/keys').mongoURI;
+
+// DB Config local
+const db = 'mongodb://localhost/audiologydev';
 
 // Connect to MongDB
 mongoose
