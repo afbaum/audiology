@@ -1,0 +1,77 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	font-familty: sans-serif;
+	color: #222;
+}
+
+.landing {
+  position: relative;
+  background: url('./images/doors.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-bottom: -20px;
+}
+
+.landing-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.navbar {
+	padding: .8rem;
+}
+
+.navbar-nav li {
+	padding: 15px;
+}
+
+.lead {
+	background-color: #3f3f3f;
+	color: white;
+}
+
+.padding {
+	padding-bottem: 2rem;
+}
+
+.social a {
+	font-size: 4.5em;
+	padding: 3rem;
+}
+
+.fa-facebook {
+	color: #3b5998;
+}
+
+.fa-twitter {
+	color: #00aced;
+}
+
+.fa-google-plus-g {
+	color: #dd4b39;
+}
+
+.fa-facebook:hover,
+.fa-twitter:hover,
+.fa-slack:hover,
+.fa-google-plus-g:hover {
+	color: #d5d5d5;
+}
+
+footer {
+	background-color: #3f3f3f;
+	color: #d5d5d5;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+hr.light {
+	border-top: 1px solid #d5d5d5;
+	width: 50%;
+}
