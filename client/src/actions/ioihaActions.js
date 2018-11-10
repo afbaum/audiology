@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ADD_IOIHA, GET_ERRORS, GET_IOIHAS } from './types';
+import { ADD_IOIHA, GET_ERRORS, GET_IOIHAS, DELETE_IOIHA } from './types';
 
 //Add IOIHA Data
 export const addIoiha = ioihaData => dispatch => {
@@ -32,6 +32,23 @@ export const getIoihas = () => dispatch => {
       dispatch({
         type: GET_IOIHAS,
         payload: null
+      })
+    );
+};
+
+//Delete Ioiha Entry
+export const deleteIoiha = id => dispatch => {
+  axios
+    .delete(`/api/ioiha/${id}`)
+    .then(res => dispatch({
+      type: DELETE_IOIHA,
+      payload: id
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
       })
     );
 };

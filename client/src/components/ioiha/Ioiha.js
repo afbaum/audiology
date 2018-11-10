@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import IoihaForm from './IoihaForm.js';
-import IoihaTable from './IoihaTable.js';
+// import IoihaTable from './IoihaTable.js';
+import IoihaFeed from './IoihaFeed';
 import { getIoihas } from '../../actions/ioihaActions'
 
 class Ioiha extends Component {
@@ -12,12 +13,6 @@ class Ioiha extends Component {
 
   render() {
     const { ioihas } = this.props.ioiha;
-
-    let ioihaContent;
-
-    if(ioihas !== null) {
-      ioihaContent = <IoihaTable ioihas={ioihas} />
-    }
 
     return (
       <div className= 'ioiha'>
@@ -30,7 +25,7 @@ class Ioiha extends Component {
               Enter, update and review Ioiha data
               </p>
               <IoihaForm />
-              {ioihaContent}
+              <IoihaFeed ioihas = {ioihas} />
             </div>
           </div>
         </div>

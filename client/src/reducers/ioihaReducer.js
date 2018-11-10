@@ -1,4 +1,4 @@
-import { ADD_IOIHA, GET_IOIHAS } from '../actions/types';
+import { ADD_IOIHA, GET_IOIHAS, DELETE_IOIHA } from '../actions/types';
 
 const initialState = {
   ioihas: [],
@@ -12,12 +12,17 @@ export default function(state = initialState, action) {
       return {
         ...state,
         ioihas: action.payload
-      }
+      };
     case ADD_IOIHA:
-    return {
-      ...state,
-      ioiha: action.payload
-    };
+      return {
+        ...state,
+        ioihas: [action.payload, ...state.ioihas]
+      };
+    case DELETE_IOIHA:
+      return {
+        ...state,
+        ioihas: state.ioihas.filter(ioiha => ioiha._id !== action.payload)
+      };
     default:
       return state;
   }

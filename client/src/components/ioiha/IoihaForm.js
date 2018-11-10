@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TextFieldGroup from '../common/TextFieldGroup';
 import { addIoiha } from '../../actions/ioihaActions.js';
+import { Link, withRouter } from 'react-router-dom';
 
 class IoihaForm extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class IoihaForm extends Component {
     this.state = {
       make: '',
       model: '',
+      style: '',
       score: '',
       prescriptiveFormula: '',
       errors: {}
@@ -19,9 +21,9 @@ class IoihaForm extends Component {
     this.onSubmit= this.onSubmit.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.errors) {
-      this.setState({errors: nextProps.errors})
+  componentWillReceiveProps(newProps) {
+    if(newProps.errors) {
+      this.setState({errors: newProps.errors})
     }
   }
 
@@ -38,12 +40,7 @@ class IoihaForm extends Component {
       prescriptiveFormula: this.state.prescriptiveFormula
     };
 
-    this.props.addIoiha(newIoiha);
-     this.setState({make: '',
-                    model: '',
-                    style: '',
-                    score: '',
-                    prescriptiveFormula: ''});
+    this.props.addIoiha(newIoiha, this.props.history)
   }
 
   onChange(e) {
@@ -58,6 +55,9 @@ class IoihaForm extends Component {
         <div className='container'>
           <div className='row'>
             <div className='col-md-12'>
+            <Link to='/dashboard' className='btn btn-light'>
+            Go Back
+            </Link>
               <h1 className='text-center'>Enter Ioiha Data</h1>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -116,4 +116,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { addIoiha })(IoihaForm);
+export default connect(mapStateToProps, { addIoiha })(withRouter(IoihaForm));
