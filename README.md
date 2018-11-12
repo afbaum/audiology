@@ -34,16 +34,22 @@ root directory.  The .env file will be emailed to individuals who require access
 
 **To Run the App**
 
+**Please Run App in chrome**
+
   1. Ensure you have node.js installed on your computer
   2. Go to the root directly of the project
   3. Clone or download the project from the repo.
-  4. Run **npm install** to install necessary packages
-  5. Add a config folder under the main directory of the Project and place the keys and passport files into the
-    config folder
+  4. Ensure you have nodeon installed globablly
+  5. Install redux dev tools in Chrome
+  4. Run **npm install** and **npm run client-install** to install necessary packages
   6. Run **npm run dev** to begin the app server process a webpage should open automatically at localhost:3000
   7. Sign up for the site
   8. Login to the site.
   9. You may enter Profile information
   10. Once you are logged in go to ioiha
-  11. On the ioiha page you can enter ioiha data, it will update at the bottom of the screen as you enter data
+  11. On the ioiha page you can enter ioiha data, it will update at the bottom of the screen on submit.
   12. Select the delete box to delete individual entries.
+
+## Furture improvements
+Error handling on the login page needs to be improved
+Everything is open on github right now for the purposes of Code-Louisville.  That information needs to be changed and removed from git repository
