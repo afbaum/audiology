@@ -38,7 +38,8 @@ root directory.  The .env file will be emailed to individuals who require access
   2. Go to the root directly of the project
   3. Clone or download the project from the repo.
   4. Run **npm install** to install necessary packages
-  5. Add a .env file to the root of project and include information sent over private communications
+  5. Add a config folder under the main directory of the Project and place the keys and passport files into the
+    config folder
   6. Run **npm run dev** to begin the app server process a webpage should open automatically at localhost:3000
   7. Sign up for the site
   8. Login to the site.
