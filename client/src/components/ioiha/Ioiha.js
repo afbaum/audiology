@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import IoihaForm from './IoihaForm.js';
-// import IoihaTable from './IoihaTable.js';
 import IoihaFeed from './IoihaFeed';
-import { getIoihas } from '../../actions/ioihaActions'
+import { getIoihas } from '../../actions/ioihaActions';
+import SelectListGroup from "../common/SelectListGroup";
 
 class Ioiha extends Component {
+
   componentDidMount() {
     this.props.getIoihas();
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value});
   }
 
   render() {
@@ -26,10 +31,10 @@ class Ioiha extends Component {
               </p>
               <IoihaForm />
               <IoihaFeed ioihas = {ioihas} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
     )
   }
 }

@@ -17,11 +17,8 @@ class Ioihas extends Component {
         <td>{ioi.style}</td>
         <td>{ioi.score}</td>
         <td>{ioi.prescriptiveFormula}</td>
-        <td><button onClick={this.onDeleteClick.bind(this, ioi._id)} className='btn btn-info'>
-          <i class="far fa-edit"></i>
-        </button></td>
         <td><button onClick={this.onDeleteClick.bind(this, ioi._id)} className='btn btn-danger'>
-          <i class="far fa-times-circle"></i>
+          <i className="far fa-times-circle"></i>
         </button></td>
       </tr>
     ))

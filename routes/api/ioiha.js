@@ -27,15 +27,16 @@ router.get('/all', passport.authenticate('jwt', { session: false }), (req, res) 
   .catch(err => res.status(404).json({ noIoihasFound: "No data found"}));
 });
 
-// @route   GET api/ioiha/:id
-// @desc    Get single ioiha data
+
+// @route   GET api/ioiha/:make
+// @desc    Get Ioiha Data by Make
 // @access  Private
-router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/:make', passport.authenticate('jwt', { session: false }), (req, res) => {
   const { errors, isValid } = validateIoiha(req.body);
 
-  Ioiha.findById(req.params.id)
+  Ioiha.find({ make: req.params.make})
   .then(ioiha => res.json(ioiha))
-  .catch(err => res.status(404).json({ noIoihaFound: "No data found with that id"}));
+  .catch(err => res.status(404).json({ noIoihaFound: "No data found for that make"}));
 });
 
 // @route   POST api/ioiha/
@@ -65,6 +66,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     .save()
     .then(ioiha => res.json(ioiha));
 });
+
 
 // @route   Delete api/ioiha/:id
 // @desc    Delete ioiha data
